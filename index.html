@@ -1,0 +1,123 @@
+<html>
+    <head>
+        <script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+  <style>
+    body {
+        background: linear-gradient(-45deg, #ff00fb, #006eff, #0e3458, #000000);
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 40px;
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
+        perspective: 800px;
+        padding: 5%;
+    }
+    
+    button{
+        animation: nothover 0.5s forwards;
+        background-color: rgba(0, 0, 0, 0);
+        color: white;
+        border-style: solid;
+        border-width: 5px;
+        border-color: white;
+        transform-style: preserve-3d;   
+    }
+    
+    .btn-particles{
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: rotateX(-15deg) rotateY(25deg) translate(-50%, -50%);
+    }
+    
+    button:hover{
+        animation: hover 0.5s forwards;
+    }
+    
+    @keyframes hover{
+        0%{
+            font-size: 100%;
+        }
+        100%{
+            font-size: 75%;
+        }
+    }
+    
+    @keyframes nothover{
+        0%{
+            font-size: 75%;
+        }
+        100%{
+            font-size: 100%;
+        }
+    }
+    
+    .btn-reset{
+        position: absolute;
+    }
+    
+    .content2{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        padding-top: 50px;
+        transform: translate(-50%, -50%);
+    }
+    
+    .content{
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        padding-top: 50px;
+        transform: translate(-50%, -50%);
+    }
+    
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+</style>
+
+    </head>
+    <body>
+        <iframe id="video" hidden="" width="560" height="315" src="https://www.youtube.com/embed/7NOSDKb0HlU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <button class="btn-reset" onclick="Reset()">Reset</button>
+        <p class="content">BracketProto's Men kissing simulator</p>
+        <button class="btn-particles" onclick="KissMen()">Kiss Men</button>
+        <p class="content2" id="content"></p>
+        <div class="particles"></div>
+    </body>
+    <script>
+        index = 0;
+        if(localStorage.getItem('index') != null){
+            index = localStorage.getItem('index');
+        }
+        startindex = index;
+        document.getElementById("content").innerHTML = "Kissed men " + index + " times!";
+        function KissMen(){
+            if(index == startindex){
+                var symbol = $("#video")[0].src.indexOf("?") > -1 ? "&" : "?";
+                //modify source to autoplay and start video
+                $("#video")[0].src += symbol + "autoplay=1";
+            }
+            index++;
+            localStorage.setItem("index", index);
+            document.getElementById("content").innerHTML = "Kissed men " + index + " times!";
+        }
+        function Reset(){
+            localStorage.setItem("index", 0);
+            index = 0;
+            document.getElementById("content").innerHTML = "Kissed men " + index + " times!";
+        }
+    </script>
+</html>
